@@ -1,0 +1,28 @@
+@"
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE/Editor
+.vscode/
+.idea/
+*.iml
+
+# Java / Spring
+target/
+out/
+bin/
+.gradle/
+build/
+*.log
+
+# Node (if any subprojects use it)
+node_modules/
+
+# Docker
+.env
+**/data/
+
+# Misc
+*.swp
+"@ | Set-Content .gitignore

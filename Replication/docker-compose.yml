@@ -1,0 +1,34 @@
+version: "3.9"
+
+services:
+  mysql-master:
+    image: mysql:8.0
+    container_name: mysql-master
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: 
+      MYSQL_DATABASE: glamgram
+    ports:
+      - "3307:3306"
+    volumes:
+      - ./master/my.cnf:/etc/mysql/conf.d/my.cnf
+      - ./master/initdb:/docker-entrypoint-initdb.d
+      - master_data:/var/lib/mysql
+
+  mysql-replica:
+    image: mysql:8.0
+    container_name: mysql-replica
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD:
+    ports:
+      - "3308:3306"
+    depends_on:
+      - mysql-master
+    volumes:
+      - ./replica/my.cnf:/etc/mysql/conf.d/my.cnf
+      - replica_data:/var/lib/mysql
+
+volumes:
+  master_data:
+  replica_data:
